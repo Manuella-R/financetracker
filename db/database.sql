@@ -50,8 +50,7 @@ CREATE TABLE `Finance tracker`(
     `userID` VARCHAR(255) NOT NULL,
     `categoryID` VARCHAR(255) NOT NULL,
     `Amount` BIGINT NOT NULL,
-    `Date` DATE NOT NULL,
-    `time` TIME NOT NULL
+    `Date` DATE NOT NULL
 );
 ALTER TABLE
     `Finance tracker` ADD PRIMARY KEY(`financeId`);
