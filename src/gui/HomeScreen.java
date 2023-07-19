@@ -5,8 +5,6 @@
  */
 package gui;
 
-import java.awt.event.ActionEvent;
-
 import javax.swing.SwingUtilities;
 
 import util.DatabaseThread;
@@ -25,9 +23,9 @@ public class HomeScreen extends javax.swing.JFrame {
         setVisible(true);
     }
 
-    public HomeScreen(DatabaseThread databaseThread) {
+    public HomeScreen(DatabaseThread databaseThread, User currentUser) {
+        this.currentUser = currentUser;
         this.databaseThread = databaseThread;
-        this.currentUser = this.databaseThread.getCurrentUser();
         initComponents();
         setVisible(true);
     }
@@ -47,12 +45,12 @@ public class HomeScreen extends javax.swing.JFrame {
         javax.swing.JPanel jPanel2;
         javax.swing.JPanel jPanel1;
         java.awt.Button contact;
-        java.awt.Button button6;
-        java.awt.Button button5;
-        java.awt.Button button4;
-        java.awt.Button button3;
-        java.awt.Button button2;
-        java.awt.Button button1;
+        java.awt.Button AccBalance;
+        java.awt.Button SetGoals;
+        java.awt.Button GenerateReport;
+        java.awt.Button viewTransaction;
+        java.awt.Button EditProfile;
+        java.awt.Button ViewGoals;
         java.awt.Button viewBudget;
         java.awt.Button viewReports;
         java.awt.Button updateBudget;
@@ -68,14 +66,14 @@ public class HomeScreen extends javax.swing.JFrame {
         signout = new java.awt.Button();
         label3 = new java.awt.Label();
         contact = new java.awt.Button();
-        button2 = new java.awt.Button();
+        EditProfile = new java.awt.Button();
         viewReports = new java.awt.Button();
-        button3 = new java.awt.Button();
-        button4 = new java.awt.Button();
-        button5 = new java.awt.Button();
+        viewTransaction = new java.awt.Button();
+        GenerateReport = new java.awt.Button();
+        SetGoals = new java.awt.Button();
         transaction = new java.awt.Button();
-        button1 = new java.awt.Button();
-        button6 = new java.awt.Button();
+        ViewGoals = new java.awt.Button();
+        AccBalance = new java.awt.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,7 +85,6 @@ public class HomeScreen extends javax.swing.JFrame {
         viewBudget.setFont(new java.awt.Font(DIALOG, 3, 24)); // NOI18N
         viewBudget.setForeground(new java.awt.Color(255, 204, 204));
         viewBudget.setLabel("View budget\n");
-        viewBudget.addActionListener(this::viewBudgetActionPerformed);
 
         label1.setFont(new java.awt.Font(DIALOG, 3, 48)); // NOI18N
         label1.setForeground(new java.awt.Color(255, 204, 204));
@@ -156,48 +153,46 @@ public class HomeScreen extends javax.swing.JFrame {
         contact.setForeground(new java.awt.Color(255, 204, 204));
         contact.setLabel("Help/Support");
 
-        button2.setBackground(new java.awt.Color(153, 0, 0));
-        button2.setFont(new java.awt.Font(DIALOG, 3, 36)); // NOI18N
-        button2.setForeground(new java.awt.Color(255, 204, 204));
-        button2.setLabel("Edit Profile");
+        EditProfile.setBackground(new java.awt.Color(153, 0, 0));
+        EditProfile.setFont(new java.awt.Font(DIALOG, 3, 36)); // NOI18N
+        EditProfile.setForeground(new java.awt.Color(255, 204, 204));
+        EditProfile.setLabel("Edit Profile");
 
         viewReports.setBackground(new java.awt.Color(255, 204, 204));
         viewReports.setFont(new java.awt.Font(DIALOG, 3, 24)); // NOI18N
         viewReports.setForeground(new java.awt.Color(153, 0, 0));
         viewReports.setLabel("View Reports");
 
-        button3.setBackground(new java.awt.Color(255, 204, 204));
-        button3.setFont(new java.awt.Font(DIALOG, 3, 24)); // NOI18N
-        button3.setForeground(new java.awt.Color(153, 0, 0));
-        button3.setLabel("View Transactions");
-        button3.addActionListener(this::viewATransactionActionPerformed);
+        viewTransaction.setBackground(new java.awt.Color(255, 204, 204));
+        viewTransaction.setFont(new java.awt.Font(DIALOG, 3, 24)); // NOI18N
+        viewTransaction.setForeground(new java.awt.Color(153, 0, 0));
+        viewTransaction.setLabel("View Transactions");
 
-        button4.setBackground(new java.awt.Color(255, 204, 204));
-        button4.setFont(new java.awt.Font(DIALOG, 3, 24)); // NOI18N
-        button4.setForeground(new java.awt.Color(153, 0, 0));
-        button4.setLabel("Generate Report");
+        GenerateReport.setBackground(new java.awt.Color(255, 204, 204));
+        GenerateReport.setFont(new java.awt.Font(DIALOG, 3, 24)); // NOI18N
+        GenerateReport.setForeground(new java.awt.Color(153, 0, 0));
+        GenerateReport.setLabel("Generate Report");
 
-        button5.setBackground(new java.awt.Color(255, 204, 204));
-        button5.setFont(new java.awt.Font(DIALOG, 3, 24)); // NOI18N
-        button5.setForeground(new java.awt.Color(153, 0, 0));
-        button5.setLabel("Set Goals");
+        SetGoals.setBackground(new java.awt.Color(255, 204, 204));
+        SetGoals.setFont(new java.awt.Font(DIALOG, 3, 24)); // NOI18N
+        SetGoals.setForeground(new java.awt.Color(153, 0, 0));
+        SetGoals.setLabel("Set Goals");
 
         transaction.setActionCommand("Add Transaction");
         transaction.setBackground(new java.awt.Color(255, 204, 204));
         transaction.setFont(new java.awt.Font(DIALOG, 3, 24)); // NOI18N
         transaction.setForeground(new java.awt.Color(153, 0, 0));
         transaction.setLabel("Add Transaction");
-        transaction.addActionListener(this::transactionActionPerformed);
 
-        button1.setBackground(new java.awt.Color(255, 204, 204));
-        button1.setFont(new java.awt.Font(DIALOG, 3, 24)); // NOI18N
-        button1.setForeground(new java.awt.Color(153, 0, 0));
-        button1.setLabel("View Goals");
+        ViewGoals.setBackground(new java.awt.Color(255, 204, 204));
+        ViewGoals.setFont(new java.awt.Font(DIALOG, 3, 24)); // NOI18N
+        ViewGoals.setForeground(new java.awt.Color(153, 0, 0));
+        ViewGoals.setLabel("View Goals");
 
-        button6.setBackground(new java.awt.Color(255, 204, 204));
-        button6.setFont(new java.awt.Font(DIALOG, 3, 24)); // NOI18N
-        button6.setForeground(new java.awt.Color(153, 0, 0));
-        button6.setLabel("View account balance");
+        AccBalance.setBackground(new java.awt.Color(255, 204, 204));
+        AccBalance.setFont(new java.awt.Font(DIALOG, 3, 24)); // NOI18N
+        AccBalance.setForeground(new java.awt.Color(153, 0, 0));
+        AccBalance.setLabel("View account balance");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -214,10 +209,10 @@ public class HomeScreen extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(button2, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                                    .addComponent(EditProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
                                     .addGap(101, 101, 101))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(button3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(viewTransaction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGap(72, 72, 72)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(transaction, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,15 +228,15 @@ public class HomeScreen extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(viewReports, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(ViewGoals, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(GenerateReport, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(SetGoals, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(60, 60, 60))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(293, 293, 293)
-                        .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(AccBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -254,20 +249,20 @@ public class HomeScreen extends javax.swing.JFrame {
                         .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(86, 86, 86)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(viewTransaction, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ViewGoals, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(viewReports, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(62, 62, 62)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(GenerateReport, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(transaction, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SetGoals, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AccBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(154, 154, 154)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(signout, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EditProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(contact, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16))
         );
@@ -289,22 +284,32 @@ public class HomeScreen extends javax.swing.JFrame {
     private void signoutActionPerformed(java.awt.event.ActionEvent evt) { 
         databaseThread.setLoggedIn(false);  
         databaseThread.interrupt();
-        SwingUtilities.invokeLater(() -> new Login(new DatabaseThread()));
+        SwingUtilities.invokeLater(() -> new Login(databaseThread));
         this.dispose();
-    }
+    }                                       
 
-    private void viewBudgetActionPerformed(ActionEvent e) {
-        SwingUtilities.invokeLater(() -> new BudgetScreen(this.databaseThread));
-        this.dispose();
-    }
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(HomeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }   
+        //</editor-fold>
 
-    private void transactionActionPerformed(ActionEvent e) {
-        SwingUtilities.invokeLater(() -> new InputTransaction(this.databaseThread));
-        this.dispose();
-    }
-
-    private void viewATransactionActionPerformed(ActionEvent e) {
-        SwingUtilities.invokeLater(() -> new ViewATransactionScreen(this.databaseThread));
-        this.dispose();
-    }                                                     
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new HomeScreen().setVisible(true));
+    }                
 }
